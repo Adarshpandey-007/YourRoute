@@ -1,0 +1,9 @@
+.env.local
+.env
+
+node_modules/
+.vscode
+*.c
+*.out
+coverage/
+*pem
