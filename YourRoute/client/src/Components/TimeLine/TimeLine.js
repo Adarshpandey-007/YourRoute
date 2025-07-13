@@ -10,6 +10,10 @@ import LaptopIcon from '@mui/icons-material/Laptop'
 import AutoGraphIcon from '@mui/icons-material/AutoGraph'
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents'
 import TrendingUpIcon from '@mui/icons-material/TrendingUp'
+import PersonIcon from '@mui/icons-material/Person'
+import AssignmentIcon from '@mui/icons-material/Assignment'
+import VideoCallIcon from '@mui/icons-material/VideoCall'
+import CelebrationIcon from '@mui/icons-material/Celebration'
 import AppContext from '../../appContext'
 import {motion, AnimatePresence} from 'framer-motion'
 import {useViewportWidth} from '../../App'
@@ -93,57 +97,57 @@ export default function MyTimeline() {
   const viewportWidth = useViewportWidth()
 
   const events = {
-    'January 2023': {
+    'January 2024': {
       url:
         viewportWidth < 600
           ? 'background/planning.png'
           : 'background/planningDesktop.png',
       icon: <LightbulbIcon />,
-      name: 'Planning',
+      name: 'The Spark of Innovation',
       description:
-        'Our journey began serendipitously when we stumbled upon a Reddit post. A fellow student expressed frustration about the unpredictable loop bus schedules. Among the sea of comments, one mentioned a discontinued bus tracker. A spark ignited within us. We saw an opportunity to contribute and immediately reached out to our professors. We were at the start of an incredible journey.',
+        'Our journey began when we identified a real problem: unpredictable public transit schedules affecting daily commuters. We discovered that existing solutions were outdated or unreliable. This sparked our mission to create YourRoute - a modern, real-time transit tracking solution that would empower commuters with live information and intelligent route planning.',
     },
-    'February 2023': {
+    'February 2024': {
       url:
         viewportWidth < 600
           ? 'background/hackathon.png'
           : 'background/hackathonDesktop.png',
       icon: <LaptopIcon />,
-      name: 'Hackathon',
+      name: 'Prototype Development',
       description:
-        'Cruzhacks was on the horizon, and we were searching for a challenge to tackle. Then, the idea of the loop bus tracker surfaced. We seized the opportunity, dedicating our energies to bring this concept to life during the hackathon. The weekend was a whirlwind of coding and collaboration, ultimately earning us the "Best Use of Github" prize. Our idea was starting to become a reality.',
+        'We started building the core infrastructure using React, Material-UI, and Google Maps API. Our initial prototype focused on real-time bus tracking with a clean, intuitive interface. We integrated Firebase for real-time data management and began developing the map visualization system that would become the heart of YourRoute.',
     },
-    'March 2023': {
+    'March 2024': {
       url:
         viewportWidth < 600
           ? 'background/competition.png'
           : 'background/competitionDesktop.png',
-      icon: <EmojiEventsIcon />,
-      name: 'Competition',
+      icon: <AutoGraphIcon />,
+      name: 'AI Integration & Testing',
       description:
-        'Bolstered by our success and the positive response from our community, we decided to take a leap of faith. We released a public beta of our app and entered it in the Google Developer Student Challenge. We were putting our creation out into the world, filled with anticipation.',
+        'This month marked a major milestone as we integrated AI-powered route planning using n8n workflow automation. We implemented intelligent ETA predictions, dynamic route optimization, and personalized recommendations. Extensive testing with real transit data helped us refine the algorithms and improve accuracy.',
     },
-    'April 2023': {
+    'April 2024': {
       url:
         viewportWidth < 600
           ? 'background/data.png'
           : 'background/dataDesktop.png',
-      icon: <AutoGraphIcon />,
-      name: 'Data Analysis',
+      icon: <EmojiEventsIcon />,
+      name: 'PWA Launch & Optimization',
       description:
-        'April was a month of refinement. With our app in the hands of users, we received invaluable feedback. This was our opportunity to listen, learn, and iterate. We worked tirelessly to improve, resolving bugs and enhancing functionality.',
+        'YourRoute evolved into a Progressive Web App (PWA) with offline capabilities, push notifications, and seamless cross-platform experience. We optimized performance, enhanced the UI/UX, and implemented advanced features like accessibility support and dark mode. The app was now ready for real-world deployment.',
     },
-    'May 2023': {
+    'May 2024': {
       url: 'background/coding.png',
       icon: <TrendingUpIcon />,
-      name: 'Coding',
+      name: 'Expansion & Future Vision',
       description:
-        'Our efforts did not go unnoticed. We were thrilled to learn we were among the top 100 teams chosen as finalists for the Google Developer Student Challenge, including just three from the United States! The recognition spurred us on to further refine our app, collaborate with school faculty, and work with transport officials to update aging infrastructure. We knew we were making a difference.',
+        'YourRoute expanded beyond Delhi to support multiple cities and transit systems. We implemented advanced features like multi-modal routing, real-time alerts, and community-driven improvements. Our vision evolved to create a comprehensive transit ecosystem that serves millions of commuters across India.',
     },
   }
 
   const [backgroundImage, setBackgroundImage] = useState(
-    events['January 2023'].url,
+    events['January 2024'].url,
   )
   const theme = useTheme()
 
@@ -185,8 +189,69 @@ export default function MyTimeline() {
         align="center"
         color={darkMode ? 'white' : 'black'}
       >
-        Timeline
+        YourRoute Development Timeline
       </Typography>
+      <Typography
+        variant="h6"
+        marginTop="2vh"
+        align="center"
+        color={darkMode ? 'white' : 'black'}
+        sx={{ opacity: 0.8, mb: 4 }}
+      >
+        Our Journey from Idea to Innovation
+      </Typography>
+              <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          mb: 4,
+          flexWrap: 'wrap',
+          gap: 2
+        }}
+      >
+        <Typography
+          variant="body2"
+          align="center"
+          color={darkMode ? 'white' : 'black'}
+          sx={{ 
+            opacity: 0.9, 
+            bgcolor: darkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)',
+            px: 2,
+            py: 1,
+            borderRadius: 2
+          }}
+        >
+          🚀 Real-Time Transit Tracking
+        </Typography>
+        <Typography
+          variant="body2"
+          align="center"
+          color={darkMode ? 'white' : 'black'}
+          sx={{ 
+            opacity: 0.9, 
+            bgcolor: darkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)',
+            px: 2,
+            py: 1,
+            borderRadius: 2
+          }}
+        >
+          🤖 AI-Powered Route Planning
+        </Typography>
+        <Typography
+          variant="body2"
+          align="center"
+          color={darkMode ? 'white' : 'black'}
+          sx={{ 
+            opacity: 0.9, 
+            bgcolor: darkMode ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)',
+            px: 2,
+            py: 1,
+            borderRadius: 2
+          }}
+        >
+          📱 Cross-Platform PWA
+        </Typography>
+      </Box>
       <VerticalTimeline lineColor={theme.palette.primary.main}>
         {Object.keys(events).map((date) => (
           <TimelineElement
@@ -197,6 +262,95 @@ export default function MyTimeline() {
           />
         ))}
       </VerticalTimeline>
+      
+      {/* Call to Action Section */}
+      <Box
+        sx={{
+          textAlign: 'center',
+          py: 6,
+          px: 2,
+          background: darkMode ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)',
+          borderRadius: 3,
+          mx: 2,
+          mb: 4
+        }}
+      >
+        <Typography
+          variant="h4"
+          sx={{ 
+            mb: 2,
+            bgcolor: theme.palette.background.paper,
+            color: theme.palette.text.primary,
+            px: 3,
+            py: 2,
+            borderRadius: 2,
+            boxShadow: theme.shadows[0],
+            display: 'inline-block'
+          }}
+        >
+          Empowering Commuters Across India 🚀
+        </Typography>
+        <Typography
+          variant="body1"
+          sx={{ 
+            mb: 3, 
+            maxWidth: 600, 
+            mx: 'auto',
+            bgcolor: theme.palette.background.paper,
+            color: theme.palette.text.primary,
+            px: 3,
+            py: 2,
+            borderRadius: 2,
+            boxShadow: theme.shadows[0]
+          }}
+        >
+          YourRoute is more than just a transit app - it's a comprehensive solution that combines real-time data, AI-powered intelligence, and user-centric design to revolutionize how people navigate cities. Our mission is to make public transportation smarter, more accessible, and more reliable for everyone.
+        </Typography>
+        <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, flexWrap: 'wrap' }}>
+          <Typography
+            variant="body2"
+            sx={{ 
+              bgcolor: theme.palette.background.paper,
+              color: theme.palette.text.primary,
+              px: 3,
+              py: 1,
+              borderRadius: 2,
+              fontWeight: 'bold',
+              boxShadow: theme.shadows[0]
+            }}
+          >
+            🎯 Real-Time Transit Data
+          </Typography>
+          <Typography
+            variant="body2"
+            sx={{ 
+              bgcolor: theme.palette.background.paper,
+              color: theme.palette.text.primary,
+              px: 3,
+              py: 1,
+              borderRadius: 2,
+              fontWeight: 'bold',
+              boxShadow: theme.shadows[0]
+            }}
+          >
+            🤖 AI-Powered Intelligence
+          </Typography>
+          <Typography
+            variant="body2"
+            sx={{ 
+              bgcolor: theme.palette.background.paper,
+              color: theme.palette.text.primary,
+              px: 3,
+              py: 1,
+              borderRadius: 2,
+              fontWeight: 'bold',
+              boxShadow: theme.shadows[0]
+            }}
+          >
+            📱 Cross-Platform Experience
+          </Typography>
+        </Box>
+      </Box>
     </div>
   )
 }

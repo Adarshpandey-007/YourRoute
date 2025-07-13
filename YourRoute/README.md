@@ -1,96 +1,159 @@
-# YourRoute
+YourRoute: Real-time Public Transportation Tracker (with AI)
+YourRoute is an advanced web application designed to revolutionize urban commuting by providing real-time tracking and intelligent predictions for public transportation (buses and metros) on an interactive map. Leveraging live data and AI, YourRoute aims to make daily travel more efficient, predictable, and user-friendly.
 
-[![Demo Link](https://img.shields.io/badge/-Demo%20Link-blue)](https://yourroute.tech/)
-[![Demo Video](https://img.shields.io/badge/-Demo%20Video-red)](https://www.youtube.com/watch?v=DlAGp-IjtJM)
-[![News Article](https://img.shields.io/badge/-News%20Article-green)](https://news.ucsc.edu/2023/07/slugloop-google-solution-challenge.html)
+Table of Contents
+Overview
 
-## Overview
+Key Features
 
-YourRoute is a real-time tracking application for loop buses at the University of California, Santa Cruz (UCSC). It provides students with accurate and up-to-date information on loop bus locations and routes, allowing them to make informed decisions about their transportation and relieving pressure on metro buses during peak hours.
+How It Works
 
+Technologies Used
 
-## Contributors:
+Setup & Installation
 
+Future Enhancements
 
+Contributing
 
-## Table of Contents
+License
 
-- [YourRoute](#yourroute)
-  - [Overview](#overview)
-  - [Contributors:](#contributors)
-  - [Table of Contents](#table-of-contents)
-  - [Inspiration](#inspiration)
-  - [Goals](#goals)
-  - [Built With](#built-with)
-  - [Challenges](#challenges)
-  - [Accomplishments](#accomplishments)
-  - [What We Learned](#what-we-learned)
-  - [What's Next](#whats-next)
-  - [How to run](#how-to-run)
+Overview
+YourRoute is a dynamic web application that allows users to visualize and track public transportation vehicles in real-time on an interactive map. Beyond simple tracking, it integrates an AI agent to provide highly accurate estimated arrival times and intelligent route suggestions, adapting to live traffic and transit conditions. Initially developed with dummy data, the project now utilizes real-time APIs to offer genuine, up-to-the-minute information, starting with Delhi's transit network.
 
-## Inspiration
+The goal is to empower commuters with precise, actionable information, reducing wait times and improving overall travel predictability.
 
-Students at the University of California are frustrated at the rough scheduling of loop buses. Due to the size of campus and various elevation changes, buses are essential to getting to class on time. However, due to the unpredictability of the campus shuttles, students often take the metro, taking up valuable space for other students that want to go off campus. Other times, students opt to wait for loop bus, instead of walking to class, and end up late when the loop doesn’t show up in time. We needed a way to accurately determine when loop buses will show up, so students can plan their commutes more efficiently, reduce overcrowding on alternative transportation options, and ensure timely arrival to classes and campus activities.
+Key Features
+Live Map Visualization: View the real-time positions of buses and metros on a detailed map, centered on the user's city (currently Delhi).
 
-## Goals
+Real-time Data Integration: Connects directly with live public transit APIs to fetch authentic, up-to-the-minute vehicle locations and status updates.
 
-- Provide accurate and up-to-date information on loop bus locations
-- Enable UCSC students to make informed decisions about their transportation
-- Relieve pressure on metro buses during peak hours
-- Be maintainable and built upon by the school community
-- Allow transport officials to monitor bus locations and routes and adjust schedules accordingly
+AI-Powered Predictive ETAs: An integrated AI agent analyzes real-time data, historical patterns, traffic conditions, and other factors to provide highly accurate estimated arrival times for buses and metros at specific stops.
 
-## Built With
+Dynamic Route Optimization: The AI agent can suggest alternative routes or transit options in real-time if delays or disruptions are detected on a user's planned journey, optimizing for efficiency.
 
-- Reprogrammed GPS emitting hardware on loop buses, installed by the school a decade ago for tracking purposes
-- Raw data processed in ExpressJS and stored on a Firebase database
-- Frontend UI built with React and Node.js, displaying bus location data from Firebase and metro bus locations on a map
-- Seamless user experience through a simple, attractive, and mobile-friendly interface that can be downloaded as a PWA
+Comprehensive Stop Information: Hovering over a bus or metro stop marker displays the stop name, along with the AI-predicted estimated arrival time of the next relevant vehicle.
 
-## Challenges
+Responsive Design: Built with React and Material UI, ensuring a seamless and intuitive user experience across desktop, tablet, and mobile devices.
 
-- Gaining access to basestations through communication with UCSC staff
-- Data transfer from receivers to server using LibCurl library and C
-- Technical issue with hosting service temporarily hindering project progress
-- Limited data availability from loop buses due to restricted operating hours on weekends
-- Hardware issues with some loop buses, gaining access to buses for repairs
+Customizable & Extensible: The modular codebase is designed for easy integration of additional real-time APIs, expansion to new cities, and support for diverse transit types.
 
+How It Works
+Data Ingestion: The application continuously fetches real-time public transportation data (vehicle locations, speeds, route information, incident reports) from dedicated transit APIs.
 
-## Accomplishments
+AI Processing & Prediction:
 
-1.  Our group has created an application that will have an immediate and positive effect on the lives of the students at UC Santa Cruz.
-2.  Our Application has a simple and attractive interface that allows the user to quickly access the data through their mobile device.
-3.  This project provides accurate and up-to-date information to the students of UC Santa Crus to reduce the pressure on the city metro buses during peak hours.
-4.  Repairing and reprogramming the GPS emitting hardware on the loop buses and basestations allows us to track the buses in real time.
-5.  This application uses multiple frameworks that all work together in order to provide an incredibly useful service to students.
-6.  Our application is built with the future in mind. It is open source and can be built upon by the school community.
+This raw real-time data is fed into a backend system.
 
-## What We Learned
+An AI agent (powered by machine learning models) processes this data alongside historical transit patterns, traffic data, and external factors (like weather).
 
-Throughout the development of YourRoute, our team learned:
+The AI generates highly accurate estimated arrival times (ETAs) for vehicles at upcoming stops.
 
-- The importance of blueprinting and designing applications before writing code
-- The challenges of integrating multiple frameworks to deliver a functional and convenient product
-- The value of a simple, user-friendly interface
-- The significance of assigning roles based on team members' strengths for efficient development
+It also continuously monitors for disruptions and identifies optimal alternative routes.
 
-## What's Next
+Map Display: The Google Maps JavaScript API renders an interactive map.
 
-- Collect data to train a machine learning model for estimating bus arrival times at given stops
-- Install required hardware on all loop buses to ensure comprehensive tracking
-- Obtain official school sponsorship
+Intelligent Markers:
 
+Bus/Metro Markers: Display the current real-time location and fleet name, dynamically updated on the map.
 
-## How to run
+Stop Markers: Show the stop name and, crucially, the AI-predicted next arrival time via an informative tooltip on hover.
 
-1. Clone the repository
-2. Run Frontend
-   1. `cd server`
-   2. `npm install`
-   3. `npm start`
-3. Run Backend
-   1. `cd server`
-   2. `npm install`
-   3. `npm start`
+User Interaction: Users can pan, zoom, and interact with the map to explore transit options, view detailed stop information, and receive intelligent route suggestions.
 
-Some backend links and enviromental variables will be required. Please contact us for more information.
+Technologies Used
+Frontend:
+
+React: A declarative, component-based JavaScript library for building user interfaces.
+
+Material UI: A popular React UI framework implementing Google's Material Design.
+
+Google Maps JavaScript API: For embedding and customizing maps in web applications.
+
+Backend & AI (Conceptual):
+
+Real-time Transit APIs: (Specific APIs would depend on the city/region, e.g., GTFS-Realtime feeds).
+
+Backend Framework (e.g., Node.js/Express, Python/Flask/Django): To handle API integrations, data processing, and serve AI predictions.
+
+Machine Learning Libraries (e.g., TensorFlow, PyTorch, scikit-learn): For building and training AI models for ETA prediction and route optimization.
+
+Database (e.g., MongoDB, PostgreSQL): For storing historical transit data and potentially user preferences.
+
+Setup & Installation
+To get YourRoute up and running locally, follow these steps:
+
+Prerequisites
+Node.js (LTS version recommended)
+
+npm or Yarn
+
+A Google Maps JavaScript API Key (with Maps JavaScript API enabled)
+
+Access to a real-time public transit API (e.g., a GTFS-Realtime feed for Delhi).
+
+Steps
+Clone the repository:
+
+git clone https://github.com/your-username/yourroute.git
+cd yourroute
+
+Install frontend dependencies:
+
+npm install # or yarn install
+
+Configure Environment Variables:
+Create a .env file in the root of the project (or wherever your frontend expects it) and add your API keys:
+
+REACT_APP_GOOGLE_MAPS_API_KEY=YOUR_GOOGLE_MAPS_API_KEY
+REACT_APP_TRANSIT_API_BASE_URL=YOUR_TRANSIT_API_BASE_URL
+# Add any other API keys or configuration needed for your backend/AI services
+
+Note: For the backend/AI components, you'll need separate environment configurations.
+
+Run the Frontend Application:
+
+npm start # or yarn start
+
+This will typically open the application in your browser at http://localhost:3000.
+
+Backend/AI Setup (Conceptual):
+
+Set up your backend server (if separate) to consume the real-time transit API data.
+
+Implement and deploy your AI models for predictions.
+
+Ensure your frontend can communicate with your backend to receive the AI-enhanced data. (Specific instructions will vary greatly depending on your chosen backend technologies).
+
+Future Enhancements
+The YourRoute project is designed for continuous improvement. Here are some key areas for future development:
+
+User Authentication & Personalization: Allow users to create accounts, save favorite routes, set home/work locations, and receive personalized transit recommendations.
+
+Advanced Notifications: Implement push notifications for real-time alerts on bus/metro arrivals, delays, or suggested reroutes.
+
+Multi-City & Multi-Modal Support: Expand the application to cover more cities and integrate data from various public transportation modes (e.g., trams, ferries, local trains).
+
+Crowdsourced Data Integration: Allow users to report issues (e.g., overcrowding, unexpected delays) to further enhance real-time accuracy and community awareness.
+
+Predictive Congestion Mapping: Use AI to predict and visualize areas of potential congestion on transit routes.
+
+Voice Assistant Integration: Enable voice commands for querying transit information.
+
+Accessibility Features: Enhance features for users with disabilities, such as audio announcements or optimized routes for wheelchair access.
+
+Contributing
+We welcome contributions to the YourRoute project! If you'd like to contribute, please follow these steps:
+
+Fork the repository.
+
+Create a new branch (git checkout -b feature/YourFeature).
+
+Make your changes and commit them (git commit -m 'Add Your Feature').
+
+Push to the branch (git push origin feature/YourFeature).
+
+Open a Pull Request.
+
+License
+This project is licensed under the MIT License - see the LICENSE file for details.

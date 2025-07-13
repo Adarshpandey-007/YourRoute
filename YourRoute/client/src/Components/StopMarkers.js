@@ -1,7 +1,15 @@
 import {Box, Tooltip} from '@mui/material'
 import React from 'react'
-import busStop from "../data/busStop.png"
+import L from 'leaflet';
+import busStop from '../data/busStop.png';
 
+export const busStopIcon = new L.Icon({
+  iconUrl: busStop,
+  iconSize: [32, 32], // adjust as needed
+  iconAnchor: [16, 32],
+  popupAnchor: [0, -32],
+  className: 'bus-stop-icon',
+});
 
 export default function StopMarker(props) {
   /*

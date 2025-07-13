@@ -16,12 +16,14 @@ import MainMobile from './Components/Landing/MainMobile'
 import MainDesktop from './Components/Landing/MainDesktop'
 import MyTimeline from './Components/TimeLine/TimeLine'
 import Wrapper from './Components/UIWrapper/Wrapper'
+import TripPlanner from './Components/TripPlanner/TripPlanner'
 import {AnimatePresence, motion} from 'framer-motion'  //create animations in the YourRoute
 
 import AppContext from './appContext'
 import AppProvider from './appProvider'
 import {ThemeProvider} from '@mui/material/styles'
 import {themeOptions} from './Components/Theme/theme'
+import {AITripPlannerProvider} from './aiTripPlannerContext'
 
 //The animatedOutlet component wraps the content rendered by the router. 
 //It uses the useOutlet hook to dynamically render content based on the 
@@ -111,9 +113,11 @@ function App() {
       <AppContext.Consumer>
         {({darkMode}) => (
           <ThemeProvider theme={themeOptions(darkMode)}>
-            <RouteProvider>
-              <RouterProvider router={router} />
-            </RouteProvider>
+            <AITripPlannerProvider>
+              <RouteProvider>
+                <RouterProvider router={router} />
+              </RouteProvider>
+            </AITripPlannerProvider>
           </ThemeProvider>
         )}
       </AppContext.Consumer>

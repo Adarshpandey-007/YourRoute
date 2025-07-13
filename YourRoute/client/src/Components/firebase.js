@@ -1,4 +1,4 @@
-import {database} from '../firebase'
+import { database } from '../firebase'
 import {collection, getDocs, query, where, Timestamp} from 'firebase/firestore'
 
 // Define the 30 minutes time interval in milliseconds
@@ -74,3 +74,5 @@ export async function getBusEtas() {
   })
   return {cw, ccw}
 }
+
+export { database }

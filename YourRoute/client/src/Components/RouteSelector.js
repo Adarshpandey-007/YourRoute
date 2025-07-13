@@ -11,11 +11,12 @@ import {
   IconButton,
   Typography,
   useTheme,
+  Box,
 } from '@mui/material'
 import {
   ExpandLess,
   ExpandMore,
-  DirectionsBus as MenuIcon,
+  DirectionsBus,
 } from '@mui/icons-material'
 import {RouteContext} from '../Route'
 import routeColors from './bus.json'
@@ -35,46 +36,33 @@ export default function RouteSelector() {
   const [isDrawerOpen, setDrawerOpen] = useState(false)
   const theme = useTheme()
 
-  const handleDrawerOpen = () => {
-    setDrawerOpen(true)
-  }
-
-  const handleDrawerClose = () => {
-    setDrawerOpen(false)
-  }
+  const handleDrawerOpen = () => setDrawerOpen(true)
+  const handleDrawerClose = () => setDrawerOpen(false)
 
   return (
     <>
-      <IconButton
-        edge="start"
-        color="primary"
-        aria-label="menu"
-        onClick={handleDrawerOpen}
-        sx={{
-          position: 'absolute',
-          top: '30px',
-          right: '30px',
-          borderRadius: '50%',
-          backgroundColor: theme.palette.background.paper,
-        }}
-      >
-        <MenuIcon />
-      </IconButton>
-      <Drawer anchor="right" open={isDrawerOpen} onClose={handleDrawerClose}>
-        <List
+      {/* Floating bus icon button */}
+      <Box sx={{ position: 'absolute', top: 30, right: 30, zIndex: 1200 }}>
+        <IconButton
+          edge="start"
+          color="primary"
+          aria-label="bus-menu"
+          onClick={handleDrawerOpen}
           sx={{
-            width: '200px',
+            borderRadius: '50%',
+            backgroundColor: theme.palette.background.paper,
+            boxShadow: 3,
           }}
         >
+          <DirectionsBus />
+        </IconButton>
+      </Box>
+      <Drawer anchor="right" open={isDrawerOpen} onClose={handleDrawerClose}>
+        <List sx={{ width: '200px' }}>
           <Typography
             variant="h5"
             component="div"
-            sx={{
-              fontWeight: 'bold',
-              textAlign: 'center',
-              marginTop: '10px',
-              marginBottom: '20px',
-            }}
+            sx={{ fontWeight: 'bold', textAlign: 'center', marginTop: '10px', marginBottom: '20px' }}
           >
             Bus Routes
           </Typography>
@@ -101,20 +89,12 @@ export default function RouteSelector() {
                     setSelectedRoute([...selectedRoute, route])
                   }
                 }}
-                sx={{
-                  padding: 0,
-                  paddingTop: '5px',
-                  paddingBottom: '5px',
-                }}
+                sx={{ padding: 0, paddingTop: '5px', paddingBottom: '5px' }}
               >
                 <Checkbox checked={selectedRoute.includes(route)} />
                 <ListItemText primary={route} />
                 <ListItemIcon>
-                  <img
-                    src={routeColors[route]}
-                    alt="bus"
-                    style={{width: '20px', height: '20px'}}
-                  />
+                  <img src={routeColors[route]} alt="bus" style={{width: '20px', height: '20px'}} />
                 </ListItemIcon>
               </ListItemButton>
             ))}
@@ -142,29 +122,17 @@ export default function RouteSelector() {
                     setSelectedRoute([...selectedRoute, route])
                   }
                 }}
-                sx={{
-                  padding: 0,
-                  paddingTop: '5px',
-                  paddingBottom: '5px',
-                }}
+                sx={{ padding: 0, paddingTop: '5px', paddingBottom: '5px' }}
               >
                 <Checkbox checked={selectedRoute.includes(route)} />
                 <ListItemText primary={route} />
                 <ListItemIcon>
-                  <img
-                    src={routeColors[route]}
-                    alt="bus"
-                    style={{width: '20px', height: '20px'}}
-                  />
+                  <img src={routeColors[route]} alt="bus" style={{width: '20px', height: '20px'}} />
                 </ListItemIcon>
               </ListItemButton>
             ))}
           </Collapse>
-          <ListItemButton
-            onClick={() => {
-              setSelectedRoute([])
-            }}
-          >
+          <ListItemButton onClick={() => setSelectedRoute([])}>
             <ListItemText primary="Clear Routes" />
           </ListItemButton>
         </List>

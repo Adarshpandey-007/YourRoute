@@ -1,0 +1,193 @@
+/* Map-specific styles */
+.user-location-icon {
+  background: transparent !important;
+  border: none !important;
+}
+
+.user-location-icon div {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Enhanced bus stop markers */
+.leaflet-popup-content {
+  font-family: 'Roboto', sans-serif;
+  min-width: 200px;
+}
+
+.leaflet-popup-content strong {
+  color: #1976d2;
+}
+
+/* Search results styling */
+.search-results-container {
+  max-height: 300px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #1976d2 #f0f0f0;
+}
+
+.search-results-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.search-results-container::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 3px;
+}
+
+.search-results-container::-webkit-scrollbar-thumb {
+  background: #1976d2;
+  border-radius: 3px;
+}
+
+.search-results-container::-webkit-scrollbar-thumb:hover {
+  background: #1565c0;
+}
+
+/* Favorite stops styling */
+.favorite-stops-container {
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Route selection dialog */
+.route-dialog .MuiDialog-paper {
+  border-radius: 12px;
+}
+
+.route-chip {
+  transition: all 0.2s ease;
+}
+
+.route-chip:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Floating action buttons */
+.map-fab {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+  transition: all 0.3s ease !important;
+}
+
+.map-fab:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Search bar styling */
+.search-bar {
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.search-bar .MuiTextField-root {
+  background: transparent;
+}
+
+.search-bar .MuiInput-underline:before,
+.search-bar .MuiInput-underline:after {
+  border-bottom: none !important;
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] .search-bar {
+  background: rgba(0, 0, 0, 0.8) !important;
+}
+
+[data-theme="dark"] .favorite-stops-container {
+  background: rgba(0, 0, 0, 0.8) !important;
+}
+
+[data-theme="dark"] .search-results-container::-webkit-scrollbar-track {
+  background: #333;
+}
+
+[data-theme="dark"] .search-results-container::-webkit-scrollbar-thumb {
+  background: #1976d2;
+}
+
+/* Enhanced popup styling */
+.leaflet-popup-content-wrapper {
+  border-radius: 8px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+}
+
+.leaflet-popup-content {
+  margin: 12px !important;
+  font-family: 'Roboto', sans-serif !important;
+}
+
+/* Nearby stops styling */
+.nearby-stops-chip {
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.nearby-stops-chip:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Route info panel animations */
+.route-info-enter {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+.route-info-enter-active {
+  opacity: 1;
+  transform: translateX(0%);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.route-info-exit {
+  opacity: 1;
+  transform: translateX(0%);
+}
+
+.route-info-exit-active {
+  opacity: 0;
+  transform: translateX(100%);
+  transition: opacity 300ms, transform 300ms;
+}
+
+/* Map click indicator */
+.map-click-indicator {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: rgba(25, 118, 210, 0.3);
+  border: 2px solid #1976d2;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: clickPulse 1s ease-out;
+}
+
+@keyframes clickPulse {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
+} 

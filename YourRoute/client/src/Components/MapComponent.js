@@ -1,28 +1,89 @@
-import React, {useState, useEffect, useContext} from 'react'
-import {
-  getAllBuses,
-  getUpdatedBuses,
-  getAllMetroBuses,
-  getUpdatedMetroBuses,
-  getBusEtas,
-} from './firebase'
-import GoogleMap from 'google-maps-react-markers'
+import React, {useState, useEffect, useContext, useRef} from 'react'
+import { MapContainer, TileLayer, Marker, Popup, ZoomControl, useMap } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
 import {Box} from '@mui/material'
-import MapMarker from './MapMarker'
-import {isBusUpdatedWithinPast30Minutes} from './helper'
-import RouteSelector from './RouteSelector'
+import { DirectionsBus as BusIcon } from '@mui/icons-material'
 import {RouteContext} from '../Route'
 import MainWizard from './Wizard/MainWizard'
 import InstallPWAButton from './PwaButton'
 import SettingsDrawer from './SettingsDrawer'
 import AppContext from '../appContext'
 import {AnimatePresence} from 'framer-motion'
-import StopMarker from './StopMarkers'
-// import delhiBusStops from '../data/delhi-bus-stops.json' // Commented out hardcoded data
 import { collection, getDocs } from 'firebase/firestore'
-import { database } from '../firebase'
+import { database, getAllBuses, getAllMetroBuses, getUpdatedBuses, getUpdatedMetroBuses, getBusEtas } from './firebase'
+import { busStopIcon } from './StopMarkers'
+import L from 'leaflet'
 
-export default function MapComponent({center, zoom}) {
+// Custom user location icon
+const userLocationIcon = L.divIcon({
+  className: 'user-location-icon',
+  html: `
+    <div style="
+      width: 20px;
+      height: 20px;
+      background: #1976d2;
+      border: 3px solid white;
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      position: relative;
+    ">
+      <div style="
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 8px;
+        height: 8px;
+        background: white;
+        border-radius: 50%;
+      "></div>
+    </div>
+  `,
+  iconSize: [20, 20],
+  iconAnchor: [10, 10]
+})
+
+// Map controller component for handling center and zoom changes
+function MapController({ center, zoom, userLocation, onCenterChange, onZoomChange, onMapClick }) {
+  const map = useMap()
+  
+  useEffect(() => {
+    if (center && (map.getCenter().lat !== center.lat || map.getCenter().lng !== center.lng)) {
+      map.setView([center.lat, center.lng], zoom)
+    }
+  }, [center, zoom, map])
+  
+  useEffect(() => {
+    const handleMoveEnd = () => {
+      const center = map.getCenter()
+      onCenterChange({ lat: center.lat, lng: center.lng })
+    }
+    
+    const handleZoomEnd = () => {
+      onZoomChange(map.getZoom())
+    }
+    
+    const handleClick = (e) => {
+      if (onMapClick) {
+        onMapClick({ lat: e.latlng.lat, lng: e.latlng.lng })
+      }
+    }
+    
+    map.on('moveend', handleMoveEnd)
+    map.on('zoomend', handleZoomEnd)
+    map.on('click', handleClick)
+    
+    return () => {
+      map.off('moveend', handleMoveEnd)
+      map.off('zoomend', handleZoomEnd)
+      map.off('click', handleClick)
+    }
+  }, [map, onCenterChange, onZoomChange, onMapClick])
+  
+  return null
+}
+
+export default function MapComponent({center, zoom, userLocation, onCenterChange, onZoomChange, onMapClick}) {
   const [displayTime, setDisplayTime] = useState(true)
   const {darkMode} = useContext(AppContext)
   const [filter, setFilter] = useState(true) // If true, only displays buses from last 30 minutes
@@ -143,69 +204,90 @@ export default function MapComponent({center, zoom}) {
   return (
     <>
       <Box id="map" width="100%" height="100vh" data-testid="map">
-        <GoogleMap
-          apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
-          defaultCenter={center}
-          defaultZoom={zoom}
-          onGoogleApiLoaded={() => {}}
-          key={darkMode ? 'dark' : 'light'}
-          options={{
-            zoomControl: false,
-            streetViewControl: false,
-            fullscreenControl: false,
-            mapTypeControl: false,
-            styles: getStyle(darkMode),
-          }}
-        >
-          {Object.keys(combinedBuses)
-            .filter(
-              // Filter out buses that haven't updated in the last 30 minutes
-              (key) => {
-                return !filter || isBusUpdatedWithinPast30Minutes(combinedBuses[key].lastPing)
-              }
-            )
-            .filter(
-              // Filter out buses that don't match the selected routes
-              (key) => selectedRoute.includes(combinedBuses[key].route),
-            )
-            .map((key) => {
-              const bus = combinedBuses[key]
-              return (
-                <MapMarker
-                  key={key}
-                  lat={parseFloat(bus.lastLatitude)}
-                  lng={parseFloat(bus.lastLongitude)}
-                  lastPing={bus.lastPing}
-                  fleetId={bus.fleetId}
-                  direction={bus.direction}
-                  route={bus.route}
-                  heading={bus.heading}
-                  displayTime={displayTime}
-                  darkMode={darkMode}
-                />
-              )
-            })}
-            {/* Delhi Bus Stops Markers */}
-            {busStops.map((stop) => (
-              <StopMarker
-                key={stop.stop_id}
-                lat={stop.lat}
-                lng={stop.lng}
-                name={stop.stop_name}
-                eta={stopsEta[stop.stop_id] || null}
-                displayTime={displayTime}
-                darkMode={darkMode}
-              />
+        <MapContainer center={[center.lat, center.lng]} zoom={zoom} style={{ height: '100vh', width: '100vw' }} zoomControl={false}>
+          <MapController 
+            center={center} 
+            zoom={zoom} 
+            userLocation={userLocation}
+            onCenterChange={onCenterChange}
+            onZoomChange={onZoomChange}
+            onMapClick={onMapClick}
+          />
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          <ZoomControl position="bottomright" />
+          
+          {/* User Location Marker */}
+          {userLocation && (
+            <Marker position={[userLocation.lat, userLocation.lng]} icon={userLocationIcon}>
+              <Popup>
+                <div>
+                  <strong>Your Location</strong><br />
+                  <small>Lat: {userLocation.lat.toFixed(6)}<br />
+                  Lng: {userLocation.lng.toFixed(6)}</small>
+                </div>
+              </Popup>
+            </Marker>
+          )}
+          
+          {/* Bus Markers */}
+          {combinedBuses
+            .filter((bus) => !filter || (bus.lastPing && true))
+            .filter((bus) => selectedRoute.includes(bus.route))
+            .map((bus) => (
+              <Marker key={bus.id} position={[parseFloat(bus.lastLatitude), parseFloat(bus.lastLongitude)]}>
+                <Popup>
+                  <div style={{ minWidth: '200px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+                      <BusIcon color="primary" style={{ fontSize: '20px' }} />
+                      <strong style={{ color: '#1976d2' }}>Bus {bus.id}</strong>
+                    </div>
+                    <div style={{ marginBottom: '4px' }}>
+                      <strong>Route:</strong> {bus.route}
+                    </div>
+                    {bus.lastPing && (
+                      <div style={{ marginBottom: '4px' }}>
+                        <strong>Last Update:</strong> {new Date(bus.lastPing).toLocaleTimeString()}
+                      </div>
+                    )}
+                    <div style={{ marginBottom: '4px' }}>
+                      <strong>Location:</strong><br />
+                      <small>Lat: {parseFloat(bus.lastLatitude).toFixed(6)}<br />
+                      Lng: {parseFloat(bus.lastLongitude).toFixed(6)}</small>
+                    </div>
+                    {bus.speed && (
+                      <div>
+                        <strong>Speed:</strong> {bus.speed} km/h
+                      </div>
+                    )}
+                  </div>
+                </Popup>
+              </Marker>
             ))}
-        </GoogleMap>
+          
+          {/* Bus Stop Markers */}
+          {busStops.map((stop) => (
+            <Marker key={stop.stop_id} position={[stop.lat, stop.lng]} icon={busStopIcon}>
+              <Popup>
+                <div>
+                  <strong>Stop:</strong> {stop.stop_name}<br />
+                  <strong>Stop ID:</strong> {stop.stop_id}
+                  {stopsEta[stop.stop_id] && <div><strong>ETA:</strong> {stopsEta[stop.stop_id]}</div>}
+                </div>
+              </Popup>
+            </Marker>
+          ))}
+        </MapContainer>
       </Box>
       <AnimatePresence mode="wait">
         {wizardOpen && (
           <MainWizard
             closeWizard={() => setWizardOpen(false)}
             neverShowAgain={() => {
-              localStorage.setItem('wizard', false)
-              setWizardOpen(false)
+              localStorage.setItem('wizard', false);
+              setWizardOpen(false);
             }}
           />
         )}
@@ -218,95 +300,6 @@ export default function MapComponent({center, zoom}) {
         darkMode={darkMode}
       />
       <InstallPWAButton />
-      <RouteSelector />
     </>
   )
-}
-
-const getStyle = (darkMode) => {
-  if (darkMode) {
-    return [
-      {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
-      {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
-      {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
-      {
-        featureType: 'administrative.locality',
-        elementType: 'labels.text.fill',
-        stylers: [{color: '#d59563'}],
-      },
-      {
-        featureType: 'road',
-        elementType: 'geometry',
-        stylers: [{color: '#38414e'}],
-      },
-      {
-        featureType: 'road',
-        elementType: 'geometry.stroke',
-        stylers: [{color: '#212a37'}],
-      },
-      {
-        featureType: 'road',
-        elementType: 'labels.text.fill',
-        stylers: [{color: '#9ca5b3'}],
-      },
-      {
-        featureType: 'road.highway',
-        elementType: 'geometry',
-        stylers: [{color: '#746855'}],
-      },
-      {
-        featureType: 'road.highway',
-        elementType: 'geometry.stroke',
-        stylers: [{color: '#1f2835'}],
-      },
-      {
-        featureType: 'road.highway',
-        elementType: 'labels.text.fill',
-        stylers: [{color: '#f3d19c'}],
-      },
-      {
-        featureType: 'transit',
-        elementType: 'geometry',
-        stylers: [{color: '#2f3948'}],
-      },
-      {
-        featureType: 'transit.station',
-        elementType: 'labels.text.fill',
-        stylers: [{color: '#d59563'}],
-      },
-      {
-        featureType: 'water',
-        elementType: 'geometry',
-        stylers: [{color: '#17263c'}],
-      },
-      {
-        featureType: 'water',
-        elementType: 'labels.text.fill',
-        stylers: [{color: '#515c6d'}],
-      },
-      {
-        featureType: 'water',
-        elementType: 'labels.text.stroke',
-        stylers: [{color: '#17263c'}],
-      },
-      {
-        featureType: 'poi',
-        stylers: [{visibility: 'off'}],
-      },
-      {
-        featureType: 'poi.school',
-        stylers: [{visibility: 'on'}], // This will show only schools
-      },
-    ]
-  }
-  return [
-    {
-      featureType: 'poi',
-      stylers: [{visibility: 'off'}],
-    },
-    {
-      featureType: 'poi.school',
-      stylers: [{visibility: 'on'}], // This will show only schools
-    },
-  ]
 }

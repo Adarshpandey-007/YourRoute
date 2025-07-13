@@ -20,13 +20,18 @@ import {AccessTime as AccessTimeIcon} from '@mui/icons-material'
 import {Menu as MenuIcon} from '@mui/icons-material'
 import HomeIcon from '@mui/icons-material/Home'
 import TimelineIcon from '@mui/icons-material/Timeline'
+import MapIcon from '@mui/icons-material/Map'
+import SmartToyIcon from '@mui/icons-material/SmartToy'
+import PersonIcon from '@mui/icons-material/Person'
 import AppContext from '../appContext'
+import { useAITripPlanner } from '../aiTripPlannerContext'
 
 export default function SettingsDrawer(props) {
   const [isDrawerOpen, setDrawerOpen] = useState(false)
   const navigate = useNavigate()
   const {darkMode, setDarkMode} = useContext(AppContext)
   const theme = useTheme()
+  const { openAITripPlanner } = useAITripPlanner()
 
   const handleDrawerOpen = () => {
     setDrawerOpen(true)
@@ -47,6 +52,7 @@ export default function SettingsDrawer(props) {
           position: 'absolute',
           right: '30px',
           top: '90px',
+          zIndex: 1200,
           borderRadius: '50%',
           backgroundColor: theme.palette.background.paper,
         }}
@@ -84,6 +90,47 @@ export default function SettingsDrawer(props) {
               }}
             />
             Home
+          </ListItemButton>
+          <ListItemButton
+            onClick={() => {
+              handleDrawerClose()
+              navigate('/map')
+            }}
+          >
+            <MapIcon
+              sx={{
+                mr: 2,
+              }}
+            />
+            Live Map
+          </ListItemButton>
+          <ListItemButton
+            onClick={() => {
+              handleDrawerClose()
+              openAITripPlanner()
+            }}
+          >
+            <SmartToyIcon
+              sx={{
+                mr: 2,
+              }}
+            />
+            AI Agent
+          </ListItemButton>
+          <ListItemButton
+            onClick={() => {
+              handleDrawerClose()
+              navigate('/')
+              // Add login/signup logic here
+              console.log('Login/Signup triggered from drawer')
+            }}
+          >
+            <PersonIcon
+              sx={{
+                mr: 2,
+              }}
+            />
+            Login/Signup
           </ListItemButton>
           <ListItemButton
             onClick={() => {

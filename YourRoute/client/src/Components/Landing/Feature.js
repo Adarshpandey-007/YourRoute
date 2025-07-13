@@ -66,60 +66,92 @@ export default function Features() {
       >
         <Box
           sx={{
-            backgroundColor: darkMode ? '' : 'rgba(255, 255, 255, 0.8)',
-            borderRadius: '10px',
-            p: 2,
+            backgroundColor: darkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0.9)',
+            borderRadius: '15px',
+            p: 3,
             width: '100%',
+            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
+            border: '1px solid rgba(255, 255, 255, 0.2)',
+            backdropFilter: 'blur(10px)',
+            transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+            '&:hover': {
+              transform: 'translateY(-5px)',
+              boxShadow: '0 8px 30px rgba(0, 0, 0, 0.15)',
+            }
           }}
         >
-          <Stack direction="row" alignItems="center" spacing={1}>
+          <Stack direction="row" alignItems="center" spacing={2}>
             <ListItemIcon>
               <DirectionsBusIcon color="secondary" fontSize="large" />
             </ListItemIcon>
-            <Typography variant="h7" color="text.primary">
-              With YourRoute, effortlessly track Campus Shuttle (Loop) buses,
-              including their real-time locations and routes. Plan your journey
-              and never miss a bus again.
-            </Typography>
+            <Box>
+              <Typography variant="h6" color="text.primary" fontWeight="bold" mb={1}>
+                Real-Time Transit Tracking
+              </Typography>
+              <Typography variant="body2" color="text.secondary" lineHeight={1.6}>
+                Experience the power of live transit data with YourRoute. Track buses and metros in real-time with precise location updates, route information, and estimated arrival times. Our advanced tracking system eliminates guesswork and keeps you informed about your journey every step of the way.
+              </Typography>
+            </Box>
           </Stack>
         </Box>
         <Box
           sx={{
-            backgroundColor: darkMode ? '' : 'rgba(255, 255, 255, 0.8)',
-            borderRadius: '10px',
-            p: 2,
+            backgroundColor: darkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0.9)',
+            borderRadius: '15px',
+            p: 3,
             width: '100%',
+            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
+            border: '1px solid rgba(255, 255, 255, 0.2)',
+            backdropFilter: 'blur(10px)',
+            transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+            '&:hover': {
+              transform: 'translateY(-5px)',
+              boxShadow: '0 8px 30px rgba(0, 0, 0, 0.15)',
+            }
           }}
         >
-          <Stack direction="row" alignItems="center" spacing={1}>
+          <Stack direction="row" alignItems="center" spacing={2}>
             <ListItemIcon>
               <TrainIcon color="secondary" fontSize="large" />
             </ListItemIcon>
-            <Typography variant="h7" color="text.primary">
-              YourRoute's service extends to Santa Cruz (Metro) buses. Stay
-              informed and ready for your commute with live tracking of
-              on-campus Metro buses, including lines 10, 15, 18, 19, and 20.
-            </Typography>
+            <Box>
+              <Typography variant="h6" color="text.primary" fontWeight="bold" mb={1}>
+                AI-Powered Route Planning
+              </Typography>
+              <Typography variant="body2" color="text.secondary" lineHeight={1.6}>
+                Leverage the power of artificial intelligence with our smart route planning system. YourRoute analyzes real-time data, traffic conditions, and historical patterns to provide optimal route suggestions, intelligent ETA predictions, and dynamic rerouting when delays occur.
+              </Typography>
+            </Box>
           </Stack>
         </Box>
         <Box
           sx={{
-            backgroundColor: darkMode ? '' : 'rgba(255, 255, 255, 0.8)',
-            borderRadius: '10px',
-            p: 2,
+            backgroundColor: darkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0.9)',
+            borderRadius: '15px',
+            p: 3,
             width: '100%',
+            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
+            border: '1px solid rgba(255, 255, 255, 0.2)',
+            backdropFilter: 'blur(10px)',
+            transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+            '&:hover': {
+              transform: 'translateY(-5px)',
+              boxShadow: '0 8px 30px rgba(0, 0, 0, 0.15)',
+            }
           }}
         >
-          <Stack direction="row" alignItems="center" spacing={1}>
+          <Stack direction="row" alignItems="center" spacing={2}>
             <ListItemIcon>
               <GetAppIcon color="secondary" fontSize="large" />
             </ListItemIcon>
-            <Typography variant="h7" color="text.primary">
-              Enjoy faster, full-screen access to YourRoute by installing it as a
-              Progressive Web App. Simply use your browser's 'Add to Home
-              screen' option for improved convenience and seamless campus
-              navigation.
-            </Typography>
+            <Box>
+              <Typography variant="h6" color="text.primary" fontWeight="bold" mb={1}>
+                Cross-Platform Experience
+              </Typography>
+              <Typography variant="body2" color="text.secondary" lineHeight={1.6}>
+                Enjoy YourRoute seamlessly across all devices. Install as a Progressive Web App for native-like experience, access offline capabilities, and benefit from push notifications. Our responsive design ensures perfect functionality on desktop, tablet, and mobile devices.
+              </Typography>
+            </Box>
           </Stack>
         </Box>
       </Stack>
