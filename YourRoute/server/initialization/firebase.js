@@ -2,22 +2,27 @@
 This script initializes a connection to a Firestore database using the Firebase Admin SDK, simplifying data management tasks in Node.js applications.
 */
 
-const admin = require('firebase-admin')
-require('dotenv').config()
+const admin = require('firebase-admin');
+require('dotenv').config();
 
-let serviceAccount
-if (process.env.FIREBASE_KEY && process.env.FIREBASE_KEY.endsWith('.json')) {
-  serviceAccount = require(process.env.FIREBASE_KEY)
-} else if (process.env.FIREBASE_KEY) {
-  serviceAccount = JSON.parse(process.env.FIREBASE_KEY)
-} else {
-  throw new Error('FIREBASE_KEY environment variable is not set!')
-}
+const serviceAccount = {
+  type: process.env.FIREBASE_TYPE,
+  project_id: process.env.FIREBASE_PROJECT_ID,
+  private_key_id: process.env.FIREBASE_PRIVATE_KEY_ID,
+  private_key: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+  client_email: process.env.FIREBASE_CLIENT_EMAIL,
+  client_id: process.env.FIREBASE_CLIENT_ID,
+  auth_uri: process.env.FIREBASE_AUTH_URI,
+  token_uri: process.env.FIREBASE_TOKEN_URI,
+  auth_provider_x509_cert_url: process.env.FIREBASE_AUTH_PROVIDER_CERT_URL,
+  client_x509_cert_url: process.env.FIREBASE_CLIENT_CERT_URL,
+  universe_domain: process.env.FIREBASE_UNIVERSE_DOMAIN,
+};
 
-let defaultApp = admin.initializeApp({
+const defaultApp = admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-})
+});
 
-let defaultDatabase = admin.firestore(defaultApp)
+const defaultDatabase = admin.firestore(defaultApp);
 
-module.exports = defaultDatabase
+module.exports = defaultDatabase;
