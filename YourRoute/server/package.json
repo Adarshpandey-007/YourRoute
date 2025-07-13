@@ -2,9 +2,17 @@
   "name": "server",
   "version": "0.0.0",
   "private": true,
+  "description": "Backend server for YourRoute app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Adarshpandey-007/YourRoute"
+  },
   "scripts": {
     "start": "node ./bin/www",
     "test": "jest --runInBand --coverage --verbose --forceExit"
+  },
+  "engines": {
+    "node": ">=16.0.0"
   },
   "devDependencies": {
     "ejs": "*",
