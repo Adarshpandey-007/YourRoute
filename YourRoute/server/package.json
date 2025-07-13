@@ -30,6 +30,7 @@
     "moment-timezone": "^0.5.43",
     "morgan": "~1.10.0",
     "openssl": "^2.0.0",
+    "punycode": "^2.3.1",
     "swagger-ui-express": "^4.6.3"
   },
   "jest": {

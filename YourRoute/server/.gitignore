@@ -1,9 +1,10 @@
-.env.local
 .env
-
+.env.local
 node_modules/
 .vscode
 *.c
 *.out
 coverage/
-*pem
+*.pem
+yourroute-9203d-firebase-adminsdk-fbsvc-5cd2482c45.json
+serviceAccountKey.json
