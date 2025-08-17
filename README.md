@@ -1,6 +1,6 @@
 # 🚍 YourRoute – AI-Powered Transit Assistant  
 
-![YourRoute Banner](https://via.placeholder.com/1200x300.png?text=YourRoute+-+AI+Transit+Assistant)  
+
 
 YourRoute is an **AI-powered multimodal transit assistant for Delhi**, designed to make public transportation smarter, faster, and more accessible.  
 It combines **real-time bus/train data, route planning, and multilingual AI chat assistance** into one seamless experience.  
