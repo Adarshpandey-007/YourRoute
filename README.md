@@ -22,7 +22,7 @@ It combines **real-time bus/train data, route planning, and multilingual AI chat
 
 ## 🏗️ Architecture  
 
-```bash
+
 client/         → React + Material UI frontend (Vercel)  
 server/         → Node.js + Express backend (Render)  
  ├─ GTFS Service → DelhiBusGTFSService (static & realtime bus data)  
@@ -32,11 +32,19 @@ server/         → Node.js + Express backend (Render)
 microservices/  → Python + FastAPI (NLP, embeddings, doc parsing)
 
 
-| Layer         | Technologies                                     |
-| ------------- | ------------------------------------------------ |
-| **Frontend**  | React, Material UI, Tailwind, Vercel             |
-| **Backend**   | Node.js, Express, FastAPI (Python microservices) |
-| **Database**  | MongoDB Atlas, Firebase Firestore                |
-| **AI Models** | Gemini 2.5 Flash & Pro                           |
-| **Maps/APIs** | Google Maps, OpenStreetMap, GTFS-Realtime        |
+| Layer         | Technologies                                                     |
+| ------------- | ------------------------------------------------                 |
+| **Frontend**  | React, Material UI, Tailwind,                                    |
+| **Backend**   | Node.js, Express                                                 |
+| **Database**  | Firebase Firestore                |
+| **AI Models** | Gemini 2.5 Flash & Pro                                           |
+| **Maps/APIs** | Google Maps, OpenStreetMap, GTFS-Realtime and static data        | 
 
+
+
+##📸 Screenshots
+
+
+
+
+<img width="1895" height="935" alt="Screenshot 2025-08-17 185746" src="https://github.com/user-attachments/assets/81c2a6d3-11d5-44f9-aefc-705002f932ba" />
