@@ -29,4 +29,14 @@ server/         → Node.js + Express backend (Render)
  ├─ AI Service   → Gemini-powered NLP (trip planning, summaries)  
  ├─ Firebase     → Realtime bus tracking + Firestore  
  └─ MongoDB      → User profiles, trips, analytics  
-microservices/  → Python + FastAPI (NLP, embeddings, doc parsing)  
+microservices/  → Python + FastAPI (NLP, embeddings, doc parsing)
+
+
+| Layer         | Technologies                                     |
+| ------------- | ------------------------------------------------ |
+| **Frontend**  | React, Material UI, Tailwind, Vercel             |
+| **Backend**   | Node.js, Express, FastAPI (Python microservices) |
+| **Database**  | MongoDB Atlas, Firebase Firestore                |
+| **AI Models** | Gemini 2.5 Flash & Pro                           |
+| **Maps/APIs** | Google Maps, OpenStreetMap, GTFS-Realtime        |
+
